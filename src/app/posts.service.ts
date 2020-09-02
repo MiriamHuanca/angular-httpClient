@@ -11,14 +11,14 @@ export class PostsService {
 
   createAndStorePost(title: string, content: string) {
     const postData: Post = {title:title, content: content};
-    this.http.post<{ name: string }>('https://ng-complete-guide-c56d3.firebaseio.com/posts.json', postData
+    this.http.post<{ name: string }>('https://ng-complete-guide-c336d.firebaseio.com/posts.json', postData
     ).subscribe(responseData => {
       console.log(responseData);
     });
   }
 
   fetchPosts() {
-    this.http.get<{ [key: string]: Post }>('https://ng-complete-guide-c56d3.firebaseio.com/posts.json').pipe(
+    return this.http.get<{ [key: string]: Post }>('https://ng-complete-guide-c336d.firebaseio.com/posts.json').pipe(
       map((responseData: { [key: string]: Post}) => {
         const postsArray: Post[] = [];
         for (const key in responseData) {
@@ -28,6 +28,6 @@ export class PostsService {
         }
         return postsArray;
       })
-    ).subscribe();
+    );
   }
 }
