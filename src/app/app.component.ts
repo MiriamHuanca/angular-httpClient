@@ -24,19 +24,23 @@ export class AppComponent implements OnInit{
     });
   }
 
-  onCleatePosts(postData: Post) {
+  onCreatePost(postData: Post) {
     this.postsService.createAndStorePost(postData.title, postData.content);
   }
 
   onFetchPosts() {
     this.isFetching = true;
-    this.postsService.fetchPosts().subscribe(posts=>{
+    this.postsService.fetchPosts().subscribe(posts =>{
       this.isFetching = false;
       this.loadedPosts = posts;
     });
   }
 
-  onClearPosts() {}
+  onClearPosts() {
+    this.postsService.deletePosts().subscribe(() => {
+      this.loadedPosts = [];
+    });
+  }
 
   private fetchPosts() {
     this.isFetching = true;
