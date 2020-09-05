@@ -34,7 +34,8 @@ export class PostsService {
     return this.http.get<{ [key: string]: Post }>('https://ng-complete-guide-c336d.firebaseio.com/posts.json',
     {
       headers: new HttpHeaders({'Custom-Header': 'Hello'}),
-      params: searchParams
+      params: searchParams,
+      responseType: 'json'
     }).pipe(
       map((responseData: { [key: string]: Post}) => {
         const postsArray: Post[] = [];
@@ -54,7 +55,8 @@ export class PostsService {
   deletePosts() {
     return this.http.delete('https://ng-complete-guide-c336d.firebaseio.com/posts.json',
     {
-      observe: 'events'
+      observe: 'events',
+      responseType: 'json'//json,blob,text
     }).pipe(
       tap(event => {
         console.log(event);
